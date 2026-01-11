@@ -1,5 +1,0 @@
-com/agencevoyage/entity/User.class
-com/agencevoyage/repository/UserRepository.class
-com/agencevoyage/config/SecurityConfig.class
-com/agencevoyage/controller/HomeController.class
-com/agencevoyage/Application.class

@@ -7,7 +7,7 @@
     <groupId>com.agencevoyage</groupId>
     <artifactId>agence-voyage-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>agence-voyage-app</name>
     <description>A travel agency web application</description>
