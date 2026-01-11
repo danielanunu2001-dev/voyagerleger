@@ -21,4 +21,14 @@ public class HomeController {
         model.addAttribute("packages", travelPackageService.findAll());
         return "index";
     }
+
+    @GetMapping("/profil")
+    public String profil() {
+        return "profil";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }

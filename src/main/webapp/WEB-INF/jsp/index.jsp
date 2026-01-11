@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,28 +16,22 @@
 </head>
 <body>
 
-    <!-- Barre de Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">VoyagePro</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Destinations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
+    <header class="main-header">
+        <nav class="main-header__nav container">
+            <a href="/" class="main-header__logo">VoyageLuxe</a>
+            <div class="main-header__actions">
+                <sec:authorize access="!isAuthenticated()">
+                    <a href="${pageContext.request.contextPath}/login" class="card__cta">Connexion</a>
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
+                    <a href="${pageContext.request.contextPath}/profil" class="card__cta" style="margin-right: 1rem;">Profil</a>
+                    <form action="${pageContext.request.contextPath}/logout" method="post" style="display: inline;">
+                        <button type="submit" class="card__cta" style="background-color: var(--color-neutral-700);">Déconnexion</button>
+                    </form>
+                </sec:authorize>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <!-- Contenu Principal -->
     <main class="container my-5">

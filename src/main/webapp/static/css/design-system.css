@@ -1,0 +1,168 @@
+/* ============================================= */
+/* DESIGN SYSTEM: DEEP HORIZON                 */
+/* ============================================= */
+
+/* 1. DESIGN TOKENS */
+:root {
+  /* Palette de Couleurs */
+  --color-primary-deep-blue: #0A2463;
+  --color-accent-emerald: #3E866B;
+  --color-accent-emerald-darker: #2d6b52;
+  --color-neutral-0: #FFFFFF;
+  --color-neutral-100: #F8F9FA;
+  --color-neutral-300: #E9ECEF;
+  --color-neutral-700: #495057;
+  --color-neutral-900: #212529;
+
+  /* Typographie */
+  --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.75rem;
+  --font-size-display: 3rem;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  /* Échelle d'Espacement (Base 8px) */
+  --spacing-1: 0.5rem; /* 8px */
+  --spacing-2: 1rem;   /* 16px */
+  --spacing-3: 1.5rem; /* 24px */
+  --spacing-4: 2rem;   /* 32px */
+  --spacing-6: 4rem;   /* 64px */
+
+  /* Autres */
+  --border-radius: 0.5rem;
+  --transition-cubic: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+/* 2. RESET & BASE STYLES */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-system);
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-700);
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-3);
+  padding-right: var(--spacing-3);
+}
+
+/* Accessibilité : Focus Visible */
+:focus-visible {
+  outline: 3px solid var(--color-accent-emerald);
+  outline-offset: 2px;
+}
+
+/* 3. LAYOUT: APP SHELL */
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: var(--spacing-2) 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-neutral-300);
+}
+
+.main-header__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header__logo {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+    color: var(--color-primary-deep-blue);
+    text-decoration: none;
+}
+
+/* 4. GRILLE DE RESULTATS */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: var(--spacing-4);
+}
+
+/* 5. COMPOSANT: CARD */
+.card {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-cubic);
+  background: var(--color-neutral-0);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card__image-container {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card__price-badge {
+  position: absolute;
+  top: var(--spacing-2);
+  right: var(--spacing-2);
+  background-color: rgba(10, 36, 99, 0.8);
+  color: var(--color-neutral-0);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: calc(var(--border-radius) / 2);
+  font-weight: var(--font-weight-bold);
+  backdrop-filter: blur(5px);
+}
+
+.card__content {
+  padding: var(--spacing-3);
+  flex-grow: 1;
+}
+
+.card__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  color: var(--color-primary-deep-blue);
+}
+
+.card__destination {
+  margin: 0 0 var(--spacing-2) 0;
+  color: var(--color-neutral-700);
+}
+
+.card__cta {
+  display: inline-block;
+  background-color: var(--color-accent-emerald);
+  color: var(--color-neutral-0);
+  text-decoration: none;
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: var(--border-radius);
+  font-weight: var(--font-weight-bold);
+  transition: var(--transition-cubic);
+  margin-top: auto; /* Aligns button to the bottom */
+}
+
+.card__cta:hover {
+  background-color: var(--color-accent-emerald-darker);
+}
