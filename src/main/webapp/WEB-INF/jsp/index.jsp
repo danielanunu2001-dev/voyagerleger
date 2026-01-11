@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,17 +18,6 @@
     <header class="main-header">
         <nav class="main-header__nav container">
             <a href="/" class="main-header__logo">VoyageLuxe</a>
-            <div class="main-header__actions">
-                <sec:authorize access="!isAuthenticated()">
-                    <a href="${pageContext.request.contextPath}/login" class="card__cta">Connexion</a>
-                </sec:authorize>
-                <sec:authorize access="isAuthenticated()">
-                    <a href="${pageContext.request.contextPath}/profil" class="card__cta" style="margin-right: 1rem;">Profil</a>
-                    <form action="${pageContext.request.contextPath}/logout" method="post" style="display: inline;">
-                        <button type="submit" class="card__cta" style="background-color: var(--color-neutral-700);">Déconnexion</button>
-                    </form>
-                </sec:authorize>
-            </div>
         </nav>
     </header>
 
