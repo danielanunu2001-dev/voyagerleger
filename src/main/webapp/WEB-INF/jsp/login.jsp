@@ -87,6 +87,7 @@
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <button type="submit" class="login-button">Se connecter</button>
         </form>
     </div>
