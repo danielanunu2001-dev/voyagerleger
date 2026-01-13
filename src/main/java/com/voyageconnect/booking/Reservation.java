@@ -8,6 +8,9 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
+/**
+ * Represents a customer's reservation.
+ */
 @Entity
 @Table(name = "reservations")
 public class Reservation {
@@ -32,13 +35,13 @@ public class Reservation {
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String status; // e.g., "PENDING", "CONFIRMED", "CANCELLED"
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private OffsetDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;
 
     @PrePersist

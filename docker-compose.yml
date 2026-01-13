@@ -1,17 +1,41 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:15
-    container_name: voyageconnect-db
+  app:
+    build: .
+    container_name: voyageconnect-app
     ports:
-      - "5432:5432"
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/voyageconnect
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - ADMIN_PASSWORD=adminpass # Change in production
+      - CLIENT_PASSWORD=password123
+
+  db:
+    image: postgres:15-alpine
+    container_name: voyageconnect-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Mount the init script to initialize the DB on first run
+      - ./src/main/resources/db/migration/V1__init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - POSTGRES_DB=voyageconnect
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
-    volumes:
-      - voyageconnect-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer
+    container_name: voyageconnect-adminer
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
 
 volumes:
-  voyageconnect-data:
+  postgres_data:

@@ -5,6 +5,9 @@ import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represents a user of the application.
+ */
 @Entity
 @Table(name = "users")
 public class User {
@@ -13,10 +16,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 100)
     private String username;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 255)
     private String email;
 
     @Column(name = "password_hash", nullable = false)

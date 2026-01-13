@@ -4,6 +4,9 @@ import com.voyageconnect.user.User;
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;
 
+/**
+ * Represents a review for a voyage, hotel, or other service.
+ */
 @Entity
 @Table(name = "reviews")
 public class Review {
@@ -19,10 +22,14 @@ public class Review {
     @Column(name = "target_id", nullable = false)
     private Long targetId; // ID of the Voyage, Hotel, etc.
 
+    @Column(name = "target_type", nullable = false, length = 50)
+    private String targetType; // e.g., "VOYAGE", "HOTEL"
+
     @Column(nullable = false)
-    private Integer rating;
+    private Integer rating; // 1 to 5
 
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String comment;
 
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -56,6 +63,14 @@ public class Review {
 
     public void setTargetId(Long targetId) {
         this.targetId = targetId;
+    }
+
+    public String getTargetType() {
+        return targetType;
+    }
+
+    public void setTargetType(String targetType) {
+        this.targetType = targetType;
     }
 
     public Integer getRating() {

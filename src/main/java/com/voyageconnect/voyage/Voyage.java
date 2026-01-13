@@ -1,9 +1,14 @@
 package com.voyageconnect.voyage;
 
+import com.voyageconnect.destination.Destination;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
+/**
+ * Represents a travel package or tour (Voyage).
+ * Subject to optimistic locking.
+ */
 @Entity
 @Table(name = "voyages")
 public class Voyage {
@@ -15,10 +20,14 @@ public class Voyage {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String type; // e.g., "Circuit", "Séjour"
 
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "destination_id", nullable = false)
+    private Destination destination;
+
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
     @Column(name = "start_date", nullable = false)
@@ -56,6 +65,14 @@ public class Voyage {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Destination getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Destination destination) {
+        this.destination = destination;
     }
 
     public BigDecimal getPrice() {

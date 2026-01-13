@@ -1,7 +1,11 @@
 package com.voyageconnect.hotel;
 
+import com.voyageconnect.destination.Destination;
 import jakarta.persistence.*;
 
+/**
+ * Represents a hotel.
+ */
 @Entity
 @Table(name = "hotels")
 public class Hotel {
@@ -13,11 +17,12 @@ public class Hotel {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String city;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "destination_id", nullable = false)
+    private Destination destination;
 
     @Column
-    private Integer rating;
+    private Integer rating; // e.g., 1 to 5 stars
 
     @Column(name = "rooms_available")
     private Integer roomsAvailable;
@@ -39,12 +44,12 @@ public class Hotel {
         this.name = name;
     }
 
-    public String getCity() {
-        return city;
+    public Destination getDestination() {
+        return destination;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setDestination(Destination destination) {
+        this.destination = destination;
     }
 
     public Integer getRating() {

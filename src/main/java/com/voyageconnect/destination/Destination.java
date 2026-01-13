@@ -2,6 +2,9 @@ package com.voyageconnect.destination;
 
 import jakarta.persistence.*;
 
+/**
+ * Represents a travel destination.
+ */
 @Entity
 @Table(name = "destinations")
 public class Destination {
@@ -10,17 +13,22 @@ public class Destination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String country;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String city;
 
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String description;
 
+    /**
+     * Comma-separated list of image URLs.
+     */
     @Lob
-    private String images; // URLs, comma-separated
+    @Column(columnDefinition = "TEXT")
+    private String images;
 
     // Getters and Setters
     public Long getId() {
